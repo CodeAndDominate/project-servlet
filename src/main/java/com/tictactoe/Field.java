@@ -6,34 +6,34 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Field {
-    private final Map<Integer, Sign> field;
+    private final Map<Integer, Sign> innerField;
 
     public Field() {
-        field = new HashMap<>();
-        field.put(0, Sign.EMPTY);
-        field.put(1, Sign.EMPTY);
-        field.put(2, Sign.EMPTY);
-        field.put(3, Sign.EMPTY);
-        field.put(4, Sign.EMPTY);
-        field.put(5, Sign.EMPTY);
-        field.put(6, Sign.EMPTY);
-        field.put(7, Sign.EMPTY);
-        field.put(8, Sign.EMPTY);
+        innerField = new HashMap<>();
+        innerField.put(0, Sign.EMPTY);
+        innerField.put(1, Sign.EMPTY);
+        innerField.put(2, Sign.EMPTY);
+        innerField.put(3, Sign.EMPTY);
+        innerField.put(4, Sign.EMPTY);
+        innerField.put(5, Sign.EMPTY);
+        innerField.put(6, Sign.EMPTY);
+        innerField.put(7, Sign.EMPTY);
+        innerField.put(8, Sign.EMPTY);
     }
 
-    public Map<Integer, Sign> getField() {
-        return field;
+    public Map<Integer, Sign> getInnerField() {
+        return innerField;
     }
 
     public int getEmptyFieldIndex() {
-        return field.entrySet().stream()
+        return innerField.entrySet().stream()
                 .filter(e -> e.getValue() == Sign.EMPTY)
                 .map(Map.Entry::getKey)
                 .findFirst().orElse(-1);
     }
 
-    public List<Sign> getFieldData() {
-        return field.entrySet().stream()
+    public List<Sign> getInnerFieldData() {
+        return innerField.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
@@ -52,9 +52,9 @@ public class Field {
         );
 
         for (List<Integer> winPossibility : winPossibilities) {
-            if (field.get(winPossibility.get(0)) == field.get(winPossibility.get(1))
-                && field.get(winPossibility.get(0)) == field.get(winPossibility.get(2))) {
-                return field.get(winPossibility.get(0));
+            if (innerField.get(winPossibility.get(0)) == innerField.get(winPossibility.get(1))
+                    && innerField.get(winPossibility.get(0)) == innerField.get(winPossibility.get(2))) {
+                return innerField.get(winPossibility.get(0));
             }
         }
         return Sign.EMPTY;
